@@ -1,6 +1,14 @@
 package hiber.model;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "users")
@@ -8,6 +16,7 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id")
    private Long id;
 
    @Column(name = "name")
