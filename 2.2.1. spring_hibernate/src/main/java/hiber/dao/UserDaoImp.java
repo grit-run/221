@@ -3,6 +3,7 @@ package hiber.dao;
 import hiber.model.Car;
 import hiber.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.TypedQuery;
@@ -23,10 +24,12 @@ public class UserDaoImp implements UserDao {
     @Override
     public void add(User user) {
         sessionFactory.getCurrentSession().save(user);
+
     }
 
     @Override
     public void add(Car car) {
+
         sessionFactory.getCurrentSession().save(car);
     }
 
@@ -45,10 +48,10 @@ public class UserDaoImp implements UserDao {
     @Override
     public User findOwner(String model, int series) {
 
-        TypedQuery<User> listUser = sessionFactory.getCurrentSession().createQuery("from User JOIN FETCH Car where :model and :series")
+        Query listUser = sessionFactory.getCurrentSession().createQuery("from User JOIN FETCH Car where :model and :series")
                 .setParameter("model", model)
                 .setParameter("series", series);
-        return (User) listUser.getResultList();
+        return (User) listUser.getSingleResult();
 
     }
 }
